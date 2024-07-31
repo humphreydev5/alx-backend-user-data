@@ -12,7 +12,7 @@
 
   
 # Learning Objectives
-At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
+  At the end of this project, you are expected to be able to [explain to anyone](https://intranet.alxswe.com/rltoken/yiowzem5NkzxawDmImXy8Q), without the help of Google:
 
 * Examples of Personally Identifiable Information (PII)
 * How to implement a log filter that will obfuscate PII fields
