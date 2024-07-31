@@ -3,7 +3,7 @@
 ![5c48d4f6d4dd8081eb48](https://github.com/user-attachments/assets/041515c5-1073-4080-bfbd-2803a69cc5ff)
 
 # Resources
-__ Read or watch: __
+-- Read or watch: --
 
 * [What Is PII, non-PII, and Personal Data?](https://intranet.alxswe.com/rltoken/jf71oYqiETchcVhPzQVnyg)
 * [logging documentation](https://intranet.alxswe.com/rltoken/W2JiHD6cbJY1scJORyLqnw)
