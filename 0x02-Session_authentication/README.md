@@ -5,7 +5,7 @@ This project contains tasks for learning to authenticate a user through session 
 ## Tasks To Complete
 
 + [x] 0. **Et moi et moi et moi!**
-  + Copy all your work of the [0x06. Basic authentication]() project in this new folder.
+  + Copy all your work of the [0x06. Basic authentication](https://github.com/humphreydev5/alx-backend-user-data/tree/master/0x01-Basic_authentication) project in this new folder.
   + In this version, you implemented a **Basic authentication** for giving you access to all User endpoints:
     + `GET /api/v1/users`.
     + `POST /api/v1/users`.
@@ -13,17 +13,17 @@ This project contains tasks for learning to authenticate a user through session 
     + `PUT /api/v1/users/<user_id>`.
     + `DELETE /api/v1/users/<user_id>`.
   + Now, you will add a new endpoint: `GET /users/me` to retrieve the authenticated `User` object.
-    + Copy folders `models` and `api` from the previous project [0x06. Basic authentication]().
+    + Copy folders `models` and `api` from the previous project [0x06. Basic authentication](https://github.com/humphreydev5/alx-backend-user-data/tree/master/0x01-Basic_authentication).
     + Please make sure all mandatory tasks of this previous project are done at 100% because this project (and the rest of this track) will be based on it.
-    + Update `@app.before_request` in [api/v1/app.py]():
+    + Update `@app.before_request` in [api/v1/app.py](https://github.com/humphreydev5/alx-backend-user-data/blob/master/0x02-Session_authentication/api/v1/app.py):
       + Assign the result of `auth.current_user(request)` to `request.current_user`.
-    + Update method for the route `GET /api/v1/users/<user_id>` in [api/v1/views/users.py]():
+    + Update method for the route `GET /api/v1/users/<user_id>` in [api/v1/views/users.py](https://github.com/humphreydev5/alx-backend-user-data/blob/master/0x02-Session_authentication/api/v1/views/users.py):
       + If `<user_id>` is equal to `me` and `request.current_user` is `None`: `abort(404)`.
       + If `<user_id>` is equal to `me` and `request.current_user` is not `None`: return the authenticated `User` in a JSON response (like a normal case of `GET /api/v1/users/<user_id>` where `<user_id>` is a valid `User` ID)
       + Otherwise, keep the same behavior.
 
 + [x] 1. **Empty session**
-  + Create a class `SessionAuth` in [api/v1/auth/session_auth.py]() that inherits from `Auth`. For the moment this class will be empty. It's the first step for creating a new authentication mechanism:
+  + Create a class `SessionAuth` in [api/v1/auth/session_auth.py](https://github.com/humphreydev5/alx-backend-user-data/blob/master/0x02-Session_authentication/api/v1/views/session_auth.py) that inherits from `Auth`. For the moment this class will be empty. It's the first step for creating a new authentication mechanism:
     + Validate if everything inherits correctly without any overloading.
     + Validate the "switch" by using environment variables.
   + Update [api/v1/app.py]() for using `SessionAuth` instance for the variable `auth` depending on the value of the environment variable `AUTH_TYPE`, If `AUTH_TYPE` is equal to `session_auth`:
@@ -54,14 +54,14 @@ This project contains tasks for learning to authenticate a user through session 
   + Now you have 2 methods (`create_session` and `user_id_for_session_id`) for storing and retrieving a link between a User ID and a Session ID.
 
 + [x] 4. **Session cookie**
-  + Update [api/v1/auth/auth.py]() by adding the method `def session_cookie(self, request=None):` that returns a cookie value from a request:
+  + Update [api/v1/auth/auth.py](https://github.com/humphreydev5/alx-backend-user-data/blob/master/0x02-Session_authentication/api/v1/auth/auth.py) by adding the method `def session_cookie(self, request=None):` that returns a cookie value from a request:
     + Return `None` if `request` is `None`.
     + Return the value of the cookie named `_my_session_id` from `request` - the name of the cookie must be defined by the environment variable `SESSION_NAME`.
     + You must use `.get()` built-in for accessing the cookie in the request cookies dictionary.
     + You must use the environment variable `SESSION_NAME` to define the name of the cookie used for the Session ID.
 
 + [x] 5. **Before request**
-  + Update the `@app.before_request` method in [api/v1/app.py]():
+  + Update the `@app.before_request` method in [api/v1/app.py](https://github.com/humphreydev5/alx-backend-user-data/blob/master/0x02-Session_authentication/api/v1/app.py):
     + Add the URL path `/api/v1/auth_session/login/` in the list of excluded paths of the method `require_auth` - this route doesn't exist yet but it should be accessible outside authentication
     + If `auth.authorization_header(request)` and `auth.session_cookie(request)` return `None`, `abort(401)`
 
@@ -76,7 +76,7 @@ This project contains tasks for learning to authenticate a user through session 
 
 + [x] 7. **New view for Session Authentication**
   + Create a new Flask view that handles all routes for the Session authentication.
-  + In the file [api/v1/views/session_auth.py](), create a route `POST /auth_session/login` (= `POST /api/v1/auth_session/login`):
+  + In the file [api/v1/views/session_auth.py](https://github.com/humphreydev5/alx-backend-user-data/blob/master/0x02-Session_authentication/api/v1/views/session_auth.py), create a route `POST /auth_session/login` (= `POST /api/v1/auth_session/login`):
     + Slash tolerant (`/auth_session/login` == `/auth_session/login/`).
     + You must use `request.form.get()` to retrieve `email` and `password` parameters.
     + If `email` is missing or empty, return the JSON `{ "error": "email missing" }` with the status code `400`.
@@ -89,7 +89,7 @@ This project contains tasks for learning to authenticate a user through session 
         + You must use `auth.create_session(..)` for creating a Session ID.
         + Return the dictionary representation of the `User` - you must use `to_json()` method from User.
         + You must set the cookie to the response - you must use the value of the environment variable `SESSION_NAME` as cookie name - [tip](https://stackoverflow.com/questions/26587485/can-a-cookie-be-set-when-using-jsonify).
-  + In the file [api/v1/views/__init__.py](), you must add this new view at the end of the file.
+  + In the file [api/v1/views/__init__.py](https://github.com/humphreydev5/alx-backend-user-data/blob/master/0x02-Session_authentication/api/v1/views/__init__.py), you must add this new view at the end of the file.
   + Now you have an authentication based on a Session ID stored in cookie, perfect for a website (browsers love cookies).
 
 + [x] 8. **Logout**
@@ -98,7 +98,7 @@ This project contains tasks for learning to authenticate a user through session 
     + If the `request` doesn't contain the Session ID cookie, return `False` - you must use `self.session_cookie(request)`.
     + If the Session ID of the request is not linked to any User ID, return `False` - you must use self.`user_id_for_session_id(...)`.
     + Otherwise, delete in `self.user_id_by_session_id` the Session ID (as key of this dictionary) and return `True`.
-  + Update the file [api/v1/views/session_auth.py](), by adding a new route `DELETE /api/v1/auth_session/logout`:
+  + Update the file [api/v1/views/session_auth.py](https://github.com/humphreydev5/alx-backend-user-data/blob/master/0x02-Session_authentication/api/v1/views/session_auth.py), by adding a new route `DELETE /api/v1/auth_session/logout`:
     + Slash tolerant.
     + You must use `from api.v1.app import auth`.
     + You must use `auth.destroy_session(request)` for deleting the Session ID contents in the request as cookie:
@@ -110,7 +110,7 @@ This project contains tasks for learning to authenticate a user through session 
     + Basic authentication.
     + Session authentication.
   + Now you will add an expiration date to a Session ID.
-  + Create a class `SessionExpAuth` that inherits from `SessionAuth` in the file [api/v1/auth/session_exp_auth.py]():
+  + Create a class `SessionExpAuth` that inherits from `SessionAuth` in the file [api/v1/auth/session_exp_auth.py](https://github.com/humphreydev5/alx-backend-user-data/blob/master/0x02-Session_authentication/api/v1/auth/session_exp_auth.py):
     + Overload `def __init__(self):` method:
       + Assign an instance attribute `session_duration`:
         + To the environment variable `SESSION_DURATION` casts to an integer.
@@ -129,17 +129,17 @@ This project contains tasks for learning to authenticate a user through session 
       + Return `None` if session dictionary doesn't contain a key `created_at`.
       + Return `None` if the `created_at` + `session_duration` seconds are before the current datetime. [datetime - timedelta](https://docs.python.org/3.5/library/datetime.html#timedelta-objects).
       + Otherwise, return `user_id` from the `session` dictionary.
-  + Update [api/v1/app.py]() to instantiate `auth` with `SessionExpAuth` if the environment variable `AUTH_TYPE` is equal to `session_exp_auth`.
+  + Update [api/v1/app.py](https://github.com/humphreydev5/alx-backend-user-data/blob/master/0x02-Session_authentication/api/v1/app.py) to instantiate `auth` with `SessionExpAuth` if the environment variable `AUTH_TYPE` is equal to `session_exp_auth`.
 
 + [x] 10. **Sessions in database**
   + Since the beginning, all Session IDs are stored in memory. It means, if your application stops, all Session IDs are lost.
   + To avoid that, you will create a new authentication system, based on Session ID stored in database (for us, it will be in a file, like `User`).
-  + Create a new model `UserSession` in [models/user_session.py]() that inherits from `Base`:
+  + Create a new model `UserSession` in [models/user_session.py](https://github.com/humphreydev5/alx-backend-user-data/blob/master/0x02-Session_authentication/models/user_session.py) that inherits from `Base`:
     + Implement the `def __init__(self, *args: list, **kwargs: dict):` like in `User` but for these 2 attributes:
       + `user_id`: string.
       + `session_id`: string.
-  + Create a new authentication class `SessionDBAuth` in [api/v1/auth/session_db_auth.py]() that inherits from `SessionExpAuth`:
+  + Create a new authentication class `SessionDBAuth` in [api/v1/auth/session_db_auth.py](https://github.com/humphreydev5/alx-backend-user-data/blob/master/0x02-Session_authentication/api/v1/auth/session_auth.py) that inherits from `SessionExpAuth`:
     + Overload `def create_session(self, user_id=None):` that creates and stores new instance of `UserSession` and returns the Session ID.
     + Overload `def user_id_for_session_id(self, session_id=None):` that returns the User ID by requesting `UserSession` in the database based on `session_id`.
     + Overload `def destroy_session(self, request=None):` that destroys the `UserSession` based on the Session ID from the request cookie.
-  + Update [api/v1/app.py]() to instantiate `auth` with `SessionDBAuth` if the environment variable `AUTH_TYPE` is equal to `session_db_auth`.
+  + Update [api/v1/app.py](https://github.com/humphreydev5/alx-backend-user-data/blob/master/0x02-Session_authentication/api/v1/app.py) to instantiate `auth` with `SessionDBAuth` if the environment variable `AUTH_TYPE` is equal to `session_db_auth`.
